@@ -1,0 +1,357 @@
+int getValidInt(const char *prompt, int min, int max);
+double getValidDouble(const char *prompt, double min, double max);
+void getValidString(const char *prompt, char *output, int size);
+int isValidEmail(const char *email);
+int isValidPhone(const char *phone);
+
+int getValidInt(const char *prompt, int min, int max)
+{
+    char input[100];
+    char *endPtr;
+    long value;
+
+    while (1)
+    {
+        printf("%s", prompt);
+
+        if (fgets(input, sizeof(input), stdin) == NULL)
+        {
+            printf("Error reading input.\n");
+            continue;
+        }
+
+        
+        input[strcspn(input, "\n")] = '\0';
+
+        
+        if (strlen(input) == 0)
+        {
+            printf("Input cannot be empty.\n");
+            continue;
+        }
+
+        
+        value = strtol(input, &endPtr, 10);
+
+        
+        while (isspace((unsigned char)*endPtr))
+        {
+            endPtr++;
+        }
+
+       
+        if (*endPtr != '\0')
+        {
+            printf("Invalid whole number. Please try again.\n");
+            continue;
+        }
+
+        
+        if (value < min || value > max)
+        {
+            printf("Please enter a number between %d and %d.\n",
+                   min, max);
+            continue;
+        }
+
+        return (int)value;
+    }
+}
+
+
+
+double getValidDouble(const char *prompt, double min, double max)
+{
+    char input[100];
+    char *endPtr;
+    double value;
+
+    while (1)
+    {
+        printf("%s", prompt);
+
+        if (fgets(input, sizeof(input), stdin) == NULL)
+        {
+            printf("Error reading input.\n");
+            continue;
+        }
+
+        
+        input[strcspn(input, "\n")] = '\0';
+
+        
+        if (strlen(input) == 0)
+        {
+            printf("Input cannot be empty.\n");
+            continue;
+        }
+
+        
+        value = strtod(input, &endPtr);
+
+        
+        while (isspace((unsigned char)*endPtr))
+        {
+            endPtr++;
+        }
+
+        
+        if (*endPtr != '\0')
+        {
+            printf("Invalid decimal number. Please try again.\n");
+            continue;
+        }
+
+        
+        if (value < min || value > max)
+        {
+            printf("Please enter a value between %.2f and %.2f.\n",
+                   min, max);
+            continue;
+        }
+
+        return value;
+    }
+}
+
+
+
+void getValidString(const char *prompt, char *output, int size)
+{
+    int onlySpaces;
+
+    while (1)
+    {
+        printf("%s", prompt);
+
+        if (fgets(output, size, stdin) == NULL)
+        {
+            printf("Error reading input.\n");
+            continue;
+        }
+
+        
+        output[strcspn(output, "\n")] = '\0';
+
+         
+        if (strlen(output) == 0)
+        {
+            printf("Input cannot be empty.\n");
+            continue;
+        }
+
+        
+        onlySpaces = 1;
+
+        for (int i = 0; output[i] != '\0'; i++)
+        {
+            if (!isspace((unsigned char)output[i]))
+            {
+                onlySpaces = 0;
+                break;
+            }
+        }
+
+        if (onlySpaces)
+        {
+            printf("Input cannot contain only spaces.\n");
+            continue;
+        }
+
+        return;
+    }
+}
+
+
+
+int isValidEmail(const char *email)
+{
+    const char *at;
+    const char *dot;
+
+    if (email == NULL)
+    {
+        return 0;
+    }
+
+   
+    if (strlen(email) < 5)
+    {
+        return 0;
+    }
+
+    
+    for (int i = 0; email[i] != '\0'; i++)
+    {
+        if (isspace((unsigned char)email[i]))
+        {
+            return 0;
+        }
+    }
+
+    
+    at = strchr(email, '@');
+
+    if (at == NULL)
+    {
+        return 0;
+    }
+
+    
+    if (at == email)
+    {
+        return 0;
+    }
+
+    
+    if (strchr(at + 1, '@') != NULL)
+    {
+        return 0;
+    }
+
+    
+    dot = strchr(at + 1, '.');
+
+    if (dot == NULL)
+    {
+        return 0;
+    }
+
+    
+    if (dot == at + 1)
+    {
+        return 0;
+    }
+
+    
+    if (*(dot + 1) == '\0')
+    {
+        return 0;
+    }
+
+    return 1;
+}
+
+
+
+int isValidPhone(const char *phone)
+{
+    int digitCount = 0;
+
+    if (phone == NULL || strlen(phone) == 0)
+    {
+        return 0;
+    }
+
+    for (int i = 0; phone[i] != '\0'; i++)
+    {
+        if (isdigit((unsigned char)phone[i]))
+        {
+            digitCount++;
+        }
+        else if (phone[i] == '+' && i == 0)
+        {
+           
+        }
+        else if (phone[i] == ' ' || phone[i] == '-')
+        {
+            
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+   
+    if (digitCount < 7 || digitCount > 15)
+    {
+        return 0;
+    }
+
+    return 1;
+}
+
+
+
+int main(void)
+{
+    int number;
+    double decimal;
+    char name[100];
+    char email[100];
+    char phone[30];
+
+    printf("========================================\n");
+    printf("       VALIDATION FUNCTION TEST\n");
+    printf("========================================\n\n");
+
+    
+    number = getValidInt(
+        "Enter employee ID (1-9999): ",
+        1,
+        9999
+    );
+
+    printf("Valid ID: %d\n\n", number);
+
+    
+    decimal = getValidDouble(
+        "Enter salary (0-1000000): ",
+        0.0,
+        1000000.0
+    );
+
+    printf("Valid salary: %.2f\n\n", decimal);
+
+    
+    getValidString(
+        "Enter employee name: ",
+        name,
+        sizeof(name)
+    );
+
+    printf("Valid name: %s\n\n", name);
+
+   
+    while (1)
+    {
+        getValidString(
+            "Enter email: ",
+            email,
+            sizeof(email)
+        );
+
+        if (isValidEmail(email))
+        {
+            printf("Valid email: %s\n\n", email);
+            break;
+        }
+
+        printf("Invalid email address. Please try again.\n");
+    }
+
+    
+    while (1)
+    {
+        getValidString(
+            "Enter phone number: ",
+            phone,
+            sizeof(phone)
+        );
+
+        if (isValidPhone(phone))
+        {
+            printf("Valid phone number: %s\n\n", phone);
+            break;
+        }
+
+        printf("Invalid phone number. Please try again.\n");
+    }
+
+    printf("========================================\n");
+    printf("All validation tests completed.\n");
+    printf("========================================\n");
+
+    return 0;
+}

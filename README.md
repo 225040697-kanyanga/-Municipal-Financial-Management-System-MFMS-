@@ -12,7 +12,8 @@
 | kanyanga 225040697 | Employees: add, display, search | employees.c, employees.h |
 | shiviro 225106507  | Employees: salary calculation and employee report | employees.c, employees.h (or salary.c, salary.h) |
 | Edwina 225040255 | Budget management and budget report | budget.c, budget.h |
-| Ndapewa 220060975| Supplier management and supplier report | suppliers.c, suppliers.h Asset management and asset report assets.c, assets.h |
+| Ndapewa 220060975| Supplier management and supplier report | suppliers.c, suppliers.h |
+| Nghinamito 226097706| Asset management and asset report assets.c, assets.h |
 | Libebe 224090550 | Main menu, reports menu, joining the modules together | main.c, reports.c, reports.h |
 | Matengu VM 223047147| Input validation, sample data, testing, README and report | validation.c, validation.h, README.md |
 

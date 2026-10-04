@@ -13,7 +13,7 @@
 | shiviro 225106507  | Employees: salary calculation and employee report | employees.c, employees.h (or salary.c, salary.h) |
 | Edwina 225040255 | Budget management and budget report | budget.c, budget.h |
 | Ndapewa 220060975| Supplier management and supplier report | suppliers.c, suppliers.h Asset management and asset report assets.c, assets.h |
-| Van Hoodbo | Main menu, reports menu, joining the modules together | main.c, reports.c, reports.h |
+| Libebe 224090550 | Main menu, reports menu, joining the modules together | main.c, reports.c, reports.h |
 | Big Time Dario | Input validation, sample data, testing, README and report | validation.c, validation.h, sampledata.c, sampledata.h, README.md |
 
 ## Project description

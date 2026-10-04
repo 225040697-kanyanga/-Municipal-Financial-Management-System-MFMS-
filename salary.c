@@ -1,6 +1,4 @@
 /*
-   salary.c
-   Salary module - written by Owen
 
    What this file does:
      1. Calculates the salary of an employee (gross and net)

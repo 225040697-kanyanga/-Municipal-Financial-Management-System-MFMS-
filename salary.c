@@ -1,110 +1,109 @@
+/*
+   salary.c
+   Salary module - written by Owen
+
+   What this file does:
+     1. Calculates the salary of an employee (gross and net)
+     2. Prints the employee report (total, highest, lowest, average)
+
+   It uses the employee arrays from employees.c, so it sees the
+   employees that were added in the employee menu.
+*/
+
 #include <stdio.h>
 #include "salary.h"
-#define MAX_ITEMS 100
+#include "employees.h"
+#include "validation.h"
 
-int empIds[MAX_ITEMS];
-float empBasicSalaries[MAX_ITEMS];
-float empAllowances[MAX_ITEMS];
-char empNames[MAX_ITEMS][50];
-float empDeductions[MAX_ITEMS];
-int numEmployees = 0;
-
-
-void calculateSalary();
-void generateReport();
-
-// Function to calculate salary for an employee
-void calculateSalary()
+// 1. Calculates the salary of an employee
+void calculateSalary(void)
 {
-    int searchId;
-    int found = 0;
-    int i;
-    printf("Calculate Salary for Employee\n");
-    printf("Enter Employee ID to calculate salary: ");
-    scanf("%d", &searchId);
+    int id;
+    int position;
+    double allowances;
+    double grossSalary;
+    double deductions;
+    double netSalary;
 
-    // Search for the employee in the array
-    for (i = 0; i < numEmployees; i++)
+    printf("\n--- CALCULATE SALARY ---\n");
+
+    if (employeeCount == 0)
     {
-        if (empIds[i] == searchId)
-        {
-            found = 1;
-            
-            //Display employee details
-            printf("Employee found:\n");
-            printf("Employee ID: %d\n", empIds[i]);
-            printf("Basic Salary: %.2f\n", empBasicSalaries[i]);
-            printf("Allowances: %.2f\n", empAllowances[i]);
-            break;
-        }
+        printf("No employees have been added yet.\n");
+        return;
     }
-    if (!found)
+
+    id = getValidInt("Enter employee ID to calculate salary: ", 1, 999999);
+    position = findEmployeeById(id);
+
+    if (position == -1)
     {
         printf("Employee not found.\n");
+        return;
     }
 
-    // Calculate deductions for the employee
-    printf("Enter deductions:\n");
-    scanf("%f", &empDeductions[i]);
+    allowances = empHousing[position] + empTransport[position];
+    grossSalary = empBasicSalary[position] + allowances;
 
-    //Calculate gross and net salary
-    float grossSalary = empBasicSalaries[i] + empAllowances[i];
-    float netSalary = grossSalary - empDeductions[i];
-    printf("Gross Salary: %.2f\n", grossSalary);
-    printf("Net Salary: %.2f\n", netSalary);
+    printf("\nEmployee found: %s (%s)\n", empName[position], empDept[position]);
+    printf("Basic Salary : N$%.2f\n", empBasicSalary[position]);
+    printf("Allowances   : N$%.2f\n", allowances);
+    printf("Gross Salary : N$%.2f\n", grossSalary);
 
-    //Display the salary slip
-    printf("\nSalary Slip:\n");
-    printf("Employee ID: %d\n", empIds[i]);
-    printf("Basic Salary: %.2f\n", empBasicSalaries[i]);
-    printf("Allowances: %.2f\n", empAllowances[i]);
-    printf("Deductions: %.2f\n", empDeductions[i]);
-    printf("Gross Salary: %.2f\n", grossSalary);
-    printf("Net Salary: %.2f\n", netSalary);
+    deductions = getValidDouble("Enter deductions (N$): ", 0, grossSalary);
+    netSalary = grossSalary - deductions;
+
+    printf("\n--- SALARY SLIP ---\n");
+    printf("Employee ID  : %d\n", empId[position]);
+    printf("Name         : %s\n", empName[position]);
+    printf("Basic Salary : N$%.2f\n", empBasicSalary[position]);
+    printf("Allowances   : N$%.2f\n", allowances);
+    printf("Deductions   : N$%.2f\n", deductions);
+    printf("Gross Salary : N$%.2f\n", grossSalary);
+    printf("Net Salary   : N$%.2f\n", netSalary);
 }
 
-    //Generate employee report 
-     void generateReport()
-    {
-        float totalSalaries = 0.0;
-        float highestSalary = 0.0;
-        float lowestSalary = 0.0;
-        float averageSalary = 0.0;
-        printf("\nEmployee Report:\n");
-        printf("EMPLOYEE REPORT\n");
+// 2. Prints the employee report
+void generateReport(void)
+{
+    double totalSalaries = 0;
+    double highestSalary;
+    double lowestSalary;
+    double averageSalary;
+    int i;
 
-    //Check if there are any employees in the system
-    if (numEmployees == 0)
+    printf("\n========================================\n");
+    printf("            EMPLOYEE REPORT\n");
+    printf("========================================\n");
+
+    if (employeeCount == 0)
     {
         printf("No employees in the system.\n");
-    return;
-    }  
+        return;
+    }
 
-    //Use the first employee's salary as a starting point for comparison
-    highestSalary = empBasicSalaries[0];
-    lowestSalary = empBasicSalaries[0];
+    highestSalary = empBasicSalary[0];
+    lowestSalary = empBasicSalary[0];
 
-    //Go through all employees to calculate total, highest, lowest, and average salaries
-    for (int i = 0; i < numEmployees; i++)
+    for (i = 0; i < employeeCount; i++)
     {
-        totalSalaries += empBasicSalaries[i];
+        totalSalaries = totalSalaries + empBasicSalary[i];
 
-        if (empBasicSalaries[i] > highestSalary)
+        if (empBasicSalary[i] > highestSalary)
         {
-            highestSalary = empBasicSalaries[i];
+            highestSalary = empBasicSalary[i];
         }
-        if (empBasicSalaries[i] < lowestSalary)
+        if (empBasicSalary[i] < lowestSalary)
         {
-            lowestSalary = empBasicSalaries[i];
+            lowestSalary = empBasicSalary[i];
         }
     }
-    averageSalary = totalSalaries / numEmployees;
 
-    //Display the report
-    printf("Total Employees: %d\n", numEmployees);
-    printf("Total Salaries: %.2f\n", totalSalaries);
-    printf("Highest Salary: %.2f\n", highestSalary);
-    printf("Lowest Salary: %.2f\n", lowestSalary);
-    printf("Average Salary: %.2f\n", averageSalary);
+    averageSalary = totalSalaries / employeeCount;
 
+    printf("Total Employees: %d\n", employeeCount);
+    printf("Total Salaries : N$%.2f\n", totalSalaries);
+    printf("Average Salary : N$%.2f\n", averageSalary);
+    printf("Highest Salary : N$%.2f\n", highestSalary);
+    printf("Lowest Salary  : N$%.2f\n", lowestSalary);
 }

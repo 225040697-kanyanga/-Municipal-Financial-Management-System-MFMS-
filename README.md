@@ -14,7 +14,7 @@
 | Edwina 225040255 | Budget management and budget report | budget.c, budget.h |
 | Ndapewa 220060975| Supplier management and supplier report | suppliers.c, suppliers.h Asset management and asset report assets.c, assets.h |
 | Libebe 224090550 | Main menu, reports menu, joining the modules together | main.c, reports.c, reports.h |
-| Matengu VM 223047147| Input validation, sample data, testing, README and report | validation.c, validation.h, sampledata.c, sampledata.h, README.md |
+| Matengu VM 223047147| Input validation, sample data, testing, README and report | validation.c, validation.h, README.md |
 
 ## Project description
 
@@ -48,8 +48,6 @@ MFMS/
 ├── reports.h
 ├── validation.c
 ├── validation.h
-├── sampledata.c
-├── sampledata.h
 └── README.md
 ```
 

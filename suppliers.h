@@ -15,7 +15,4 @@ void searchSupplier(void);
 void compareSuppliers(void);
 void supplierReport(void);
 
-int isValidEmail(const char *email);
-int isValidPhone(const char *phone);
-
 #endif

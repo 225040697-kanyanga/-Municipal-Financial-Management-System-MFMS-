@@ -5,6 +5,8 @@
 **Language:** ANSI C (C99)
 **Due date:** 04 October 2026
 
+link to the project repo https://github.com/225040697-kanyanga/-Municipal-Financial-Management-System-MFMS-.git
+
 ## Group members and responsibilities
 
 | Member | Responsibility | Files |

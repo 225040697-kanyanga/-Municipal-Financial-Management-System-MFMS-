@@ -2,6 +2,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "suppliers.h"
+#include "validation.h"
 
 #define INPUT_BUF 256
 
@@ -171,39 +172,6 @@ static int searchBy(int mode, const char *key)
         }
     }
     return found;
-}
-
-int isValidEmail(const char *email)
-{
-    int len = (int)strlen(email);
-    int at = -1;
-    int i;
-
-    for (i = 0; i < len; i++) {
-        if (isspace((unsigned char)email[i]))
-            return 0;
-        if (email[i] == '@') {
-            if (at != -1)
-                return 0;
-            at = i;
-        }
-    }
-    return (at > 0 && at < len - 1);
-}
-
-int isValidPhone(const char *phone)
-{
-    int len = (int)strlen(phone);
-    int i;
-
-    if (len < 7 || len > 15)
-        return 0;
-
-    for (i = 0; i < len; i++) {
-        if (!isdigit((unsigned char)phone[i]))
-            return 0;
-    }
-    return 1;
 }
 
 void addSupplier(void)

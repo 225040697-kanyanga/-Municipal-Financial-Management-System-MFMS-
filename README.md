@@ -12,8 +12,7 @@
 | kanyanga 225040697 | Employees: add, display, search | employees.c, employees.h |
 | shiviro 225106507  | Employees: salary calculation and employee report | employees.c, employees.h (or salary.c, salary.h) |
 | Edwina | Budget management and budget report | budget.c, budget.h |
-| Ndapewa | Supplier management and supplier report | suppliers.c, suppliers.h |
-| Humble Kid | Asset management and asset report | assets.c, assets.h |
+| Ndapewa 220060975| Supplier management and supplier report | suppliers.c, suppliers.h | Asset management and asset report | assets.c, assets.h |
 | Van Hoodbo | Main menu, reports menu, joining the modules together | main.c, reports.c, reports.h |
 | Big Time Dario | Input validation, sample data, testing, README and report | validation.c, validation.h, sampledata.c, sampledata.h, README.md |
 

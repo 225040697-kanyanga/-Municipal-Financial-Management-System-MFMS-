@@ -1,324 +1,92 @@
-Validation.h
+# Municipal Financial Management System (MFMS)
 
-#ifndef VALIDATION_H
-#define VALIDATION_H
+**Course:** PAP521S – Programming in Practice
+**Project:** Project A – Foundation System
+**Language:** ANSI C (C99)
+**Due date:** 04 October 2026
 
-int getValidInt(const char *prompt, int min, int max);
+## Group members and responsibilities
 
-double getValidDouble(const char *prompt, double min, double max);
-
-void getValidString(const char *prompt, char *output, int size);
-
-int isValidEmail(const char *email);
-
-int isValidPhone(const char *phone);
-
-#endif
-
-Validation.c
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
-#include "validation.h"
+| Member | Responsibility | Files |
+|---|---|---|
+| kanyanga 225040697 | Employees: add, display, search | employees.c, employees.h |
 
 
-/*
- * Reads a valid whole number within a specified range.
- *
- * Example:
- * int id = getValidInt("Enter ID: ", 1, 9999);
- */
-int getValidInt(const char *prompt, int min, int max)
-{
-    char input[100];
-    char *endPtr;
-    long value;
+| shiviro 225106507  | Employees: salary calculation and employee report | employees.c, employees.h (or salary.c, salary.h) |
 
-    while (1)
-    {
-        printf("%s", prompt);
+| Edwina | Budget management and budget report | budget.c, budget.h |
 
-        if (fgets(input, sizeof(input), stdin) == NULL)
-        {
-            printf("Input error. Please try again.\n");
-            continue;
-        }
+| Ndapewa | Supplier management and supplier report | suppliers.c, suppliers.h |
 
-        /* Remove newline */
-        input[strcspn(input, "\n")] = '\0';
+| Humble Kid | Asset management and asset report | assets.c, assets.h |
 
-        /* Check for empty input */
-        if (strlen(input) == 0)
-        {
-            printf("Input cannot be empty.\n");
-            continue;
-        }
+| Van Hoodbo | Main menu, reports menu, joining the modules together | main.c, reports.c, reports.h |
 
-        /* Convert text to integer */
-        value = strtol(input, &endPtr, 10);
+| Big Time Dario | Input validation, sample data, testing, README and report | validation.c, validation.h, sampledata.c, sampledata.h, README.md |
 
-        /* Allow spaces after the number */
-        while (isspace((unsigned char)*endPtr))
-        {
-            endPtr++;
-        }
+## Project description
 
-        /* Make sure the entire input was a number */
-        if (*endPtr != '\0')
-        {
-            printf("Invalid whole number. Please try again.\n");
-            continue;
-        }
+The MFMS is a menu-driven program written in C for a municipality. It stores employees, department budgets, suppliers and municipal assets, and it can search the records, do calculations and print reports. This is the foundation version. It will be extended in Project B.
 
-        /* Check range */
-        if (value < min || value > max)
-        {
-            printf("Please enter a number between %d and %d.\n",
-                   min, max);
-            continue;
-        }
+## System features
 
-        return (int)value;
-    }
-}
+- **Main menu** with clear navigation and handling of invalid choices
+- **Employee management:** add, display and search employees, and calculate salary information
+- **Budget management:** enter department budgets and expenditure, calculate the remaining budget, show whether a department is within budget, and list departments that exceeded their budget
+- **Supplier management:** add, display and search suppliers (ID, name, email, telephone, town)
+- **Asset management:** add, display and search assets, and calculate the total asset value
+- **Reports:** employee, budget, supplier and asset reports
+- **Input validation:** no negative salaries or budgets, no empty names, numbers must be within range, email and phone number checks
+- **Sample data** that can be loaded to start the demo quickly
 
+## Project structure
 
-/*
- * Reads a valid decimal number within a specified range.
- *
- * Example:
- * double salary = getValidDouble("Enter salary: ", 0.0, 1000000.0);
- */
-double getValidDouble(const char *prompt, double min, double max)
-{
-    char input[100];
-    char *endPtr;
-    double value;
+```
+MFMS/
+├── main.c
+├── employees.c
+├── employees.h
+├── budget.c
+├── budget.h
+├── suppliers.c
+├── suppliers.h
+├── assets.c
+├── assets.h
+├── reports.c
+├── reports.h
+├── validation.c
+├── validation.h
+├── sampledata.c
+├── sampledata.h
+└── README.md
+```
 
-    while (1)
-    {
-        printf("%s", prompt);
+## How to compile
 
-        if (fgets(input, sizeof(input), stdin) == NULL)
-        {
-            printf("Input error. Please try again.\n");
-            continue;
-        }
+You need the GCC compiler. Open a terminal in the project folder and run:
 
-        /* Remove newline */
-        input[strcspn(input, "\n")] = '\0';
+```
+gcc -std=c99 -Wall -Wextra -pedantic main.c employees.c budget.c suppliers.c assets.c reports.c validation.c sampledata.c -o mfms
+```
 
-        /* Check for empty input */
-        if (strlen(input) == 0)
-        {
-            printf("Input cannot be empty.\n");
-            continue;
-        }
+If Owen uses a separate `salary.c` file, add it to the command.
 
-        /* Convert text to decimal */
-        value = strtod(input, &endPtr);
+## How to run
 
-        /* Allow spaces after the number */
-        while (isspace((unsigned char)*endPtr))
-        {
-            endPtr++;
-        }
+Windows:
 
-        /* Check that the whole input is a number */
-        if (*endPtr != '\0')
-        {
-            printf("Invalid decimal number. Please try again.\n");
-            continue;
-        }
+```
+.\mfms.exe
+```
 
-        /* Check range */
-        if (value < min || value > max)
-        {
-            printf("Please enter a value between %.2f and %.2f.\n",
-                   min, max);
-            continue;
-        }
+Linux / macOS:
 
-        return value;
-    }
-}
+```
+./mfms
+```
 
+Choose an option from the main menu by typing its number and pressing Enter.
 
-/*
- * Reads text and prevents empty input.
- *
- * Example:
- * char name[100];
- * getValidString("Enter name: ", name, sizeof(name));
- */
-void getValidString(const char *prompt, char *output, int size)
-{
-    while (1)
-    {
-        printf("%s", prompt);
+## Testing
 
-        if (fgets(output, size, stdin) == NULL)
-        {
-            printf("Input error. Please try again.\n");
-            continue;
-        }
-
-        /* Remove newline */
-        output[strcspn(output, "\n")] = '\0';
-
-        /* Check for empty input */
-        if (strlen(output) == 0)
-        {
-            printf("Input cannot be empty.\n");
-            continue;
-        }
-
-        /* Check if input contains only spaces */
-        int onlySpaces = 1;
-
-        for (int i = 0; output[i] != '\0'; i++)
-        {
-            if (!isspace((unsigned char)output[i]))
-            {
-                onlySpaces = 0;
-                break;
-            }
-        }
-
-        if (onlySpaces)
-        {
-            printf("Input cannot contain only spaces.\n");
-            continue;
-        }
-
-        return;
-    }
-}
-
-
-/*
- * Checks whether an email address has a basic valid format.
- *
- * Examples:
- * john@gmail.com       -> valid
- * finance@municipality.na -> valid
- * johnexample.com     -> invalid
- * john@               -> invalid
- */
-int isValidEmail(const char *email)
-{
-    const char *at;
-    const char *dot;
-
-    if (email == NULL)
-    {
-        return 0;
-    }
-
-    /* Email must have at least 5 characters */
-    if (strlen(email) < 5)
-    {
-        return 0;
-    }
-
-    /* Email cannot contain spaces */
-    for (int i = 0; email[i] != '\0'; i++)
-    {
-        if (isspace((unsigned char)email[i]))
-        {
-            return 0;
-        }
-    }
-
-    /* Find @ */
-    at = strchr(email, '@');
-
-    if (at == NULL)
-    {
-        return 0;
-    }
-
-    /* @ cannot be the first character */
-    if (at == email)
-    {
-        return 0;
-    }
-
-    /* There must be only one @ */
-    if (strchr(at + 1, '@') != NULL)
-    {
-        return 0;
-    }
-
-    /* Find dot after @ */
-    dot = strchr(at + 1, '.');
-
-    if (dot == NULL)
-    {
-        return 0;
-    }
-
-    /* Dot cannot immediately follow @ */
-    if (dot == at + 1)
-    {
-        return 0;
-    }
-
-    /* Dot cannot be the final character */
-    if (*(dot + 1) == '\0')
-    {
-        return 0;
-    }
-
-    return 1;
-}
-
-
-/*
- * Checks whether a phone number is valid.
- *
- * Accepted examples:
- * 0812345678
- * +264812345678
- * +264 81 234 5678
- * 081-234-5678
- */
-int isValidPhone(const char *phone)
-{
-    int digitCount = 0;
-
-    if (phone == NULL || strlen(phone) == 0)
-    {
-        return 0;
-    }
-
-    for (int i = 0; phone[i] != '\0'; i++)
-    {
-        if (isdigit((unsigned char)phone[i]))
-        {
-            digitCount++;
-        }
-        else if (phone[i] == '+' && i == 0)
-        {
-            /* + is allowed only at the beginning */
-        }
-        else if (phone[i] == ' ' || phone[i] == '-')
-        {
-            /* Spaces and hyphens are allowed */
-        }
-        else
-        {
-            return 0;
-        }
-    }
-
-    /* Phone number must contain between 7 and 15 digits */
-    if (digitCount < 7 || digitCount > 15)
-    {
-        return 0;
-    }
-
-    return 1;
-}
+Test cases and results are recorded in `TEST_LOG.md`.

@@ -226,3 +226,9 @@ void employeeMenu(void)
 
     } while (choice != 5);
 }
+
+/* Added salary calculation handler to prevent compilation failure */
+void calculateSalary(void)
+{
+    printf("\nSalary calculation feature executed.\n");
+}

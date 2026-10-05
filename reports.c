@@ -18,11 +18,11 @@ static int readReportChoice(void)
         return -1;
     }
 
-    while (*end == ' ' || *end == '\\t' || *end == '\\n' || *end == '\\r') {
+    while (*end == ' ' || *end == '\t' || *end == '\n' || *end == '\r') {
         end++;
     }
 
-    if (*end != '\\0' || value < REPORT_MENU_MIN || value > REPORT_MENU_MAX) {
+    if (*end != '\0' || value < REPORT_MENU_MIN || value > REPORT_MENU_MAX) {
         return -1;
     }
 
@@ -34,15 +34,15 @@ void displayReports(void)
     int choice;
 
     do {
-        printf("\\n==============================================\\n");
-        printf("                 REPORTS MENU\\n");
-        printf("==============================================\\n");
-        printf("  1. Employee Report\\n");
-        printf("  2. Budget Report\\n");
-        printf("  3. Supplier Report\\n");
-        printf("  4. Asset Report\\n");
-        printf("  5. Back to Main Menu\\n");
-        printf("==============================================\\n");
+        printf("\n==============================================\n");
+        printf("                 REPORTS MENU\n");
+        printf("==============================================\n");
+        printf("  1. Employee Report\n");
+        printf("  2. Budget Report\n");
+        printf("  3. Supplier Report\n");
+        printf("  4. Asset Report\n");
+        printf("  5. Back to Main Menu\n");
+        printf("==============================================\n");
         printf("Enter your choice (1-5): ");
 
         choice = readReportChoice();
@@ -65,11 +65,11 @@ void displayReports(void)
                 break;
 
             case REPORT_BACK:
-                printf("\\nReturning to the main menu...\\n");
+                printf("\nReturning to the main menu...\n");
                 break;
 
             default:
-                printf("\\nInvalid choice. Please enter a number from 1 to 5.\\n");
+                printf("\nInvalid choice. Please enter a number from 1 to 5.\n");
                 break;
         }
 

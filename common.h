@@ -48,9 +48,9 @@ void assetMenu(void);
 void assetReport(void);
 
 /* Functions implemented by the validation member, if used */
-int getValidInt(int min, int max);
-double getValidDouble(void);
-void getValidString(char *destination, int size);
+int getValidInt(const char *prompt, int min, int max);
+double getValidDouble(const char *prompt, double min, double max);
+void getValidString(const char *prompt, char *destination, int size);
 int isValidEmail(const char *email);
 int isValidPhone(const char *phone);
 void loadSampleData(void);

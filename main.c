@@ -20,11 +20,11 @@ static int readMenuChoice(void)
         return -1;
     }
 
-    while (*end == ' ' || *end == '\\t' || *end == '\\n' || *end == '\\r') {
+    while (*end == ' ' || *end == '\t' || *end == '\n' || *end == '\r') {
         end++;
     }
 
-    if (*end != '\\0') {
+    if (*end != '\0') {
         return -1;
     }
 
@@ -37,17 +37,17 @@ static int readMenuChoice(void)
 
 void displayMenu(void)
 {
-    printf("\\n==================================================\\n");
-    printf("       MUNICIPAL FINANCIAL MANAGEMENT SYSTEM\\n");
-    printf("                    VAN HOODBO\\n");
-    printf("==================================================\\n");
-    printf("  1. Employee Management\\n");
-    printf("  2. Budget Management\\n");
-    printf("  3. Supplier Management\\n");
-    printf("  4. Asset Management\\n");
-    printf("  5. Reports Menu\\n");
-    printf("  6. Exit\\n");
-    printf("==================================================\\n");
+    printf("\n==================================================\n");
+    printf("       MUNICIPAL FINANCIAL MANAGEMENT SYSTEM\n");
+    printf("                    VAN HOODBO\n");
+    printf("==================================================\n");
+    printf("  1. Employee Management\n");
+    printf("  2. Budget Management\n");
+    printf("  3. Supplier Management\n");
+    printf("  4. Asset Management\n");
+    printf("  5. Reports Menu\n");
+    printf("  6. Exit\n");
+    printf("==================================================\n");
     printf("Enter your choice (1-6): ");
 }
 
@@ -55,7 +55,7 @@ int main(void)
 {
     int choice;
 
-    printf("\\nWelcome to the Municipal Financial Management System!\\n");
+    printf("\nWelcome to the Municipal Financial Management System!\n");
 
     /* Load sample data here if the group's sample-data module is ready. */
     /* loadSampleData(); */
@@ -86,12 +86,12 @@ int main(void)
                 break;
 
             case MENU_EXIT:
-                printf("\\nThank you for using the Municipal Financial Management System.\\n");
-                printf("Goodbye!\\n");
+                printf("\nThank you for using the Municipal Financial Management System.\n");
+                printf("Goodbye!\n");
                 break;
 
             default:
-                printf("\\nInvalid choice. Please enter a number from 1 to 6.\\n");
+                printf("\nInvalid choice. Please enter a number from 1 to 6.\n");
                 break;
         }
 

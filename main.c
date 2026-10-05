@@ -39,7 +39,7 @@ void displayMenu(void)
 {
     printf("\n==================================================\n");
     printf("       MUNICIPAL FINANCIAL MANAGEMENT SYSTEM\n");
-    printf("                    VAN HOODBO\n");
+    printf("                    \n");
     printf("==================================================\n");
     printf("  1. Employee Management\n");
     printf("  2. Budget Management\n");

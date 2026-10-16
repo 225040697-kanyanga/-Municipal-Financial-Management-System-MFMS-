@@ -13,5 +13,6 @@ void addAsset(void);
 void displayAssets(void);
 void searchAsset(void);
 void assetReport(void);
+void loadSampleAssets(void);
 
 #endif

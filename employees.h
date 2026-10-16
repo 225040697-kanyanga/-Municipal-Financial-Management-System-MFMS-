@@ -25,5 +25,6 @@ void searchEmployee(void);
 void employeeMenu(void);
 
 void calculateSalary(void);
+void loadSampleEmployees(void);
 
 #endif

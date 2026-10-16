@@ -403,3 +403,26 @@ void assetMenu(void)
         }
     } while (choice != 5);
 }
+
+/* Loads sample assets (used by loadSampleData) */
+void loadSampleAssets(void)
+{
+    const char *ids[]   = {"1", "2", "3"};
+    const char *names[] = {"Toyota Hilux", "Dell Laptop", "Town Hall"};
+    const char *types[] = {"Vehicle", "Computer", "Building"};
+    double values[]     = {350000, 18000, 5000000};
+    const char *depts[] = {"Transport", "Finance", "Administration"};
+    const char *conds[] = {"Good", "Good", "Fair"};
+    int i;
+
+    for (i = 0; i < 3 && assetCount < MAX_ASSETS; i++) {
+        if (findAssetIndex(ids[i]) != -1) continue;
+        strcpy(assetId[assetCount], ids[i]);
+        strcpy(assetName[assetCount], names[i]);
+        strcpy(assetType[assetCount], types[i]);
+        assetValue[assetCount] = values[i];
+        strcpy(assetDept[assetCount], depts[i]);
+        strcpy(assetCondition[assetCount], conds[i]);
+        assetCount++;
+    }
+}

@@ -7,5 +7,6 @@ double calculateBudget(int i);
 void displayBudgets(void);
 void budgetReport(void);
 void budgetMenu(void);
+void loadSampleBudgets(void);
 
 #endif

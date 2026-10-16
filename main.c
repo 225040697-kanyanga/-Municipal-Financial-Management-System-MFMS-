@@ -1,45 +1,9 @@
 #include "common.h"
-#include <stdlib.h>
-#include <string.h>
-
-/* Read an integer safely without leaving invalid characters in stdin. */
-static int readMenuChoice(void)
-{
-    char input[100];
-    char *end;
-    long value;
-
-    if (fgets(input, sizeof(input), stdin) == NULL) {
-        return -1;
-    }
-
-    value = strtol(input, &end, 10);
-
-    /* Reject blank input, non-numeric input and extra characters. */
-    if (end == input) {
-        return -1;
-    }
-
-    while (*end == ' ' || *end == '\t' || *end == '\n' || *end == '\r') {
-        end++;
-    }
-
-    if (*end != '\0') {
-        return -1;
-    }
-
-    if (value < MAIN_MENU_MIN || value > MAIN_MENU_MAX) {
-        return -1;
-    }
-
-    return (int)value;
-}
 
 void displayMenu(void)
 {
     printf("\n==================================================\n");
     printf("       MUNICIPAL FINANCIAL MANAGEMENT SYSTEM\n");
-    printf("                    \n");
     printf("==================================================\n");
     printf("  1. Employee Management\n");
     printf("  2. Budget Management\n");
@@ -48,7 +12,6 @@ void displayMenu(void)
     printf("  5. Reports Menu\n");
     printf("  6. Exit\n");
     printf("==================================================\n");
-    printf("Enter your choice (1-6): ");
 }
 
 int main(void)
@@ -57,12 +20,17 @@ int main(void)
 
     printf("\nWelcome to the Municipal Financial Management System!\n");
 
-    /* Load sample data here if the group's sample-data module is ready. */
-    /* loadSampleData(); */
+    /* Offer the demo data so the system can be shown quickly. */
+    printf("\nLoad sample data?\n");
+    printf("  1. Yes\n");
+    printf("  2. No\n");
+    if (getValidInt("Enter your choice (1-2): ", 1, 2) == 1) {
+        loadSampleData();
+    }
 
     do {
         displayMenu();
-        choice = readMenuChoice();
+        choice = getValidInt("Enter your choice (1-6): ", MAIN_MENU_MIN, MAIN_MENU_MAX);
 
         switch (choice) {
             case MENU_EMPLOYEES:

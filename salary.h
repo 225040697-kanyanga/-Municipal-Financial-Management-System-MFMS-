@@ -2,6 +2,6 @@
 #define SALARY_H
 
 void calculateSalary(void);
-void generateReport(void);
+void employeeReport(void);
 
 #endif

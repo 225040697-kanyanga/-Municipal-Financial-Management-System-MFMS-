@@ -12,12 +12,12 @@ link to the project repo https://github.com/225040697-kanyanga/-Municipal-Financ
 | Member | Responsibility | Files |
 |---|---|---|
 | kanyanga 225040697 | Employees: add, display, search | employees.c, employees.h |
-| shiviro 225106507  | Employees: salary calculation and employee report | employees.c, employees.h (or salary.c, salary.h) |
+| shiviro 225106507  | Employees: salary calculation and employee report | salary.c, salary.h |
 | Edwina 225040255 | Budget management and budget report | budget.c, budget.h |
 | Ndapewa 220060975| Supplier management and supplier report | suppliers.c, suppliers.h |
 | Nghinamito 226097706| Asset management and asset report | assets.c, assets.h |
-| Libebe 224090550 | Main menu, reports menu, joining the modules together | main.c, reports.c, reports.h |
-| Matengu VM 223047147| Input validation, sample data, testing, README and report | validation.c, validation.h, README.md |
+| Libebe 224090550 | Main menu, reports menu, joining the modules together | main.c, reports.c, reports.h, common.h |
+| Matengu VM 223047147| Input validation, sample data, testing, README and report | validation.c, validation.h, sampledata.c, README.md, TEST_LOG.md |
 
 ## Project description
 
@@ -39,8 +39,11 @@ The MFMS is a menu-driven program written in C for a municipality. It stores emp
 ```
 MFMS/
 ├── main.c
+├── common.h
 ├── employees.c
 ├── employees.h
+├── salary.c
+├── salary.h
 ├── budget.c
 ├── budget.h
 ├── suppliers.c
@@ -51,7 +54,9 @@ MFMS/
 ├── reports.h
 ├── validation.c
 ├── validation.h
-└── README.md
+├── sampledata.c
+├── README.md
+└── TEST_LOG.md
 ```
 
 ## How to compile
@@ -59,10 +64,10 @@ MFMS/
 You need the GCC compiler. Open a terminal in the project folder and run:
 
 ```
-gcc -std=c99 -Wall -Wextra -pedantic main.c employees.c budget.c suppliers.c assets.c reports.c validation.c sampledata.c -o mfms
+gcc -std=c99 -Wall -Wextra -pedantic main.c employees.c salary.c budget.c suppliers.c assets.c reports.c validation.c sampledata.c -o mfms
 ```
 
-If Owen uses a separate `salary.c` file, add it to the command.
+File names are case-sensitive on Linux and macOS, so keep them all in lower case.
 
 ## How to run
 
@@ -78,7 +83,7 @@ Linux / macOS:
 ./mfms
 ```
 
-Choose an option from the main menu by typing its number and pressing Enter.
+When the program starts it asks whether to load the sample data (4 employees, 3 departments, 3 suppliers, 3 assets). Choose an option from the menus by typing its number and pressing Enter.
 
 ## Testing
 

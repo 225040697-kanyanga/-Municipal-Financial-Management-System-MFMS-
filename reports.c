@@ -1,33 +1,5 @@
 #include "common.h"
-#include <stdlib.h>
-
-/* Read and validate a reports-menu choice. */
-static int readReportChoice(void)
-{
-    char input[100];
-    char *end;
-    long value;
-
-    if (fgets(input, sizeof(input), stdin) == NULL) {
-        return -1;
-    }
-
-    value = strtol(input, &end, 10);
-
-    if (end == input) {
-        return -1;
-    }
-
-    while (*end == ' ' || *end == '\t' || *end == '\n' || *end == '\r') {
-        end++;
-    }
-
-    if (*end != '\0' || value < REPORT_MENU_MIN || value > REPORT_MENU_MAX) {
-        return -1;
-    }
-
-    return (int)value;
-}
+#include "reports.h"
 
 void displayReports(void)
 {
@@ -43,9 +15,8 @@ void displayReports(void)
         printf("  4. Asset Report\n");
         printf("  5. Back to Main Menu\n");
         printf("==============================================\n");
-        printf("Enter your choice (1-5): ");
 
-        choice = readReportChoice();
+        choice = getValidInt("Enter your choice (1-5): ", REPORT_MENU_MIN, REPORT_MENU_MAX);
 
         switch (choice) {
             case REPORT_EMPLOYEES:

@@ -393,3 +393,24 @@ void supplierMenu(void)
         }
     } while (choice != 6);
 }
+
+/* Loads sample suppliers (used by loadSampleData) */
+void loadSampleSuppliers(void)
+{
+    const char *ids[]    = {"S1", "S2", "S3"};
+    const char *names[]  = {"Acme Ltd", "Namib Supplies", "Oshakati Traders"};
+    const char *emails[] = {"acme@mail.com", "info@namib.com", "sales@oshtraders.com"};
+    const char *phones[] = {"0811234567", "0812223333", "0816667777"};
+    const char *towns[]  = {"Windhoek", "Windhoek", "Oshakati"};
+    int i;
+
+    for (i = 0; i < 3 && supplierCount < MAX_SUPPLIERS; i++) {
+        if (findSupplierIndex(ids[i]) != -1) continue;
+        strcpy(supplierId[supplierCount], ids[i]);
+        strcpy(supplierName[supplierCount], names[i]);
+        strcpy(supplierEmail[supplierCount], emails[i]);
+        strcpy(supplierPhone[supplierCount], phones[i]);
+        strcpy(supplierTown[supplierCount], towns[i]);
+        supplierCount++;
+    }
+}

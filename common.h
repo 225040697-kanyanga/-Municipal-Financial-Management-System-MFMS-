@@ -1,10 +1,11 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-/* VAN HOODBO - Municipal Financial Management System
+/* MFMS - Municipal Financial Management System
    Shared constants and function prototypes. */
 
 #include <stdio.h>
+#include "validation.h"
 
 #define MAIN_MENU_MIN 1
 #define MAIN_MENU_MAX 6
@@ -27,11 +28,11 @@
 #define REPORT_ASSETS    4
 #define REPORT_BACK      5
 
-/* Menus implemented by Van Hoodbo */
+/* Menus implemented by Libebe */
 void displayMenu(void);
 void displayReports(void);
 
-/* Employee module - Hidden and Owen */
+/* Employee module - kanyanga and shiviro */
 void employeeMenu(void);
 void employeeReport(void);
 
@@ -43,16 +44,11 @@ void budgetReport(void);
 void supplierMenu(void);
 void supplierReport(void);
 
-/* Asset module - Humble Kid */
+/* Asset module - Nghinamito */
 void assetMenu(void);
 void assetReport(void);
 
 /* Functions implemented by the validation member, if used */
-int getValidInt(const char *prompt, int min, int max);
-double getValidDouble(const char *prompt, double min, double max);
-void getValidString(const char *prompt, char *destination, int size);
-int isValidEmail(const char *email);
-int isValidPhone(const char *phone);
 void loadSampleData(void);
 
 #endif

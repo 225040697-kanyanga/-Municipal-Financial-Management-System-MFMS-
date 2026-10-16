@@ -227,8 +227,30 @@ void employeeMenu(void)
     } while (choice != 5);
 }
 
-/* Added salary calculation handler to prevent compilation failure */
-void calculateSalary(void)
+/* Loads a few sample employees (used by loadSampleData) */
+static void addSampleEmployee(int id, const char *name, const char *dept,
+                              const char *title, double basic,
+                              double housing, double transport)
 {
-    printf("\nSalary calculation feature executed.\n");
+    if (employeeCount >= MAX_EMPLOYEES || findEmployeeById(id) != -1)
+    {
+        return;
+    }
+
+    empId[employeeCount] = id;
+    strcpy(empName[employeeCount], name);
+    strcpy(empDept[employeeCount], dept);
+    strcpy(empTitle[employeeCount], title);
+    empBasicSalary[employeeCount] = basic;
+    empHousing[employeeCount] = housing;
+    empTransport[employeeCount] = transport;
+    employeeCount = employeeCount + 1;
+}
+
+void loadSampleEmployees(void)
+{
+    addSampleEmployee(101, "John Smith",     "Finance",   "Accountant",   15000, 3000, 1500);
+    addSampleEmployee(102, "Maria Shikongo", "Health",    "Nurse",        12000, 2500, 1200);
+    addSampleEmployee(103, "Peter Nangolo",  "Transport", "Driver",        9000, 1800, 1000);
+    addSampleEmployee(104, "Anna Haufiku",   "Planning",  "Town Planner", 18000, 3500, 1800);
 }

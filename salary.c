@@ -62,7 +62,7 @@ void calculateSalary(void)
 }
 
 // 2. Prints the employee report
-void generateReport(void)
+void employeeReport(void)
 {
     double totalSalaries = 0;
     double highestSalary;

@@ -14,5 +14,6 @@ void displaySuppliers(void);
 void searchSupplier(void);
 void compareSuppliers(void);
 void supplierReport(void);
+void loadSampleSuppliers(void);
 
 #endif

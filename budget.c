@@ -221,3 +221,20 @@ void budgetMenu(void)
 
     } while (choice != 5);
 }
+
+// Loads sample budgets (used by loadSampleData)
+void loadSampleBudgets(void)
+{
+    const char *names[] = {"Finance", "Health", "Transport"};
+    double alloc[] = {500000, 100000, 250000};
+    double spent[] = {420000, 150000, 90000};
+    int i;
+
+    for (i = 0; i < 3 && departmentCount < MAX_DEPARTMENTS; i++)
+    {
+        strcpy(departments[departmentCount], names[i]);
+        budgets[departmentCount] = alloc[i];
+        expenditures[departmentCount] = spent[i];
+        departmentCount++;
+    }
+}

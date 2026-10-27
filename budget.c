@@ -1,15 +1,3 @@
-/*
-
-   What this file does:
-     1. Stores department budgets and expenditure in arrays
-     2. Adds a department budget
-     3. Adds expenditure to a department
-     4. Calculates the remaining budget
-     5. Displays all budgets
-     6. Prints the budget report
-     7. Shows the budget menu
-*/
-
 #include <stdio.h>
 #include <string.h>
 #include "budget.h"
@@ -18,13 +6,11 @@
 #define MAX_DEPARTMENTS 20
 #define DEPT_NAME 50
 
-// 1. Stores department budgets and expenditure in arrays
 char departments[MAX_DEPARTMENTS][DEPT_NAME];
 double budgets[MAX_DEPARTMENTS];
 double expenditures[MAX_DEPARTMENTS];
 int departmentCount = 0;
 
-// 2. Adds a department budget
 void addBudget(void)
 {
     int i;
@@ -56,7 +42,6 @@ void addBudget(void)
     printf("Budget added successfully.\n");
 }
 
-// 3. Adds expenditure to a department
 void addExpenditure(void)
 {
     char name[DEPT_NAME];
@@ -93,13 +78,13 @@ void addExpenditure(void)
     printf("Expenditure added successfully.\n");
 }
 
-// 4. Calculates the remaining budget of department i
+
 double calculateBudget(int i)
 {
     return budgets[i] - expenditures[i];
 }
 
-// 5. Displays all budgets
+
 void displayBudgets(void)
 {
     int i;
@@ -133,7 +118,7 @@ void displayBudgets(void)
     }
 }
 
-// 6. Prints the budget report
+
 void budgetReport(void)
 {
     double totalBudget = 0;
@@ -180,7 +165,7 @@ void budgetReport(void)
     }
 }
 
-// 7. Shows the budget menu
+
 void budgetMenu(void)
 {
     int choice;
@@ -222,7 +207,7 @@ void budgetMenu(void)
     } while (choice != 5);
 }
 
-// Loads sample budgets (used by loadSampleData)
+
 void loadSampleBudgets(void)
 {
     const char *names[] = {"Finance", "Health", "Transport"};
